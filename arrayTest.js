@@ -37,4 +37,8 @@ cars[0] = car01
 cars[1] = car02
 cars[2] = car03
 
-console.log(cars);
+for(var i = 0; i < cars.length; i++){
+    var element = cars[i];
+    //Todo BMW라는 차가 있을때 ! 출력
+    console.log(element.name);
+}
