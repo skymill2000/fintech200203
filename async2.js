@@ -1,7 +1,7 @@
 function aFunc() {
     setTimeout(function () {
         console.log('a');
-    },2000)
+    },700)
 }
 
 function bFunc() {
