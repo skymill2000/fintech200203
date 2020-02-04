@@ -13,6 +13,10 @@ app.get('/', function (req, res) {
   res.render('test')
 })
 
+app.get('/designTest', function(req, res){
+  res.render('designTest')
+})
+
 app.get('/home', function (req, res) {
     res.send('home page')
 })
