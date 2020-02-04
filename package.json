@@ -20,7 +20,9 @@
   "homepage": "https://github.com/skymill2000/fintech200203#readme",
   "description": "",
   "dependencies": {
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "request": "^2.88.0",
     "xml2js": "^0.4.23"
   }
