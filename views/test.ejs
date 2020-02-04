@@ -17,7 +17,21 @@
         console.log("page is loaded");
         $("#signupBtn").click(function(){
             console.log("btn is clicked"); 
-            console.log($("#userId").val());                
+            console.log($("#userId").val());
+            console.log($("#userPassword").val());      
+            var userId = $("#userId").val();
+            var userPassword = $("#userPassword").val();
+            $.ajax({
+                url:'http://localhost:3000/join',
+                type : 'POST',
+                data : {
+                    userId : userId,
+                    userPassword : userPassword
+                },
+                success:function(data){
+                    console.log(data);
+                  }
+            })          
         });
     </script>
 
