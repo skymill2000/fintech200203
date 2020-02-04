@@ -41,4 +41,7 @@ for(var i = 0; i < cars.length; i++){
     var element = cars[i];
     //Todo BMW라는 차가 있을때 ! 출력
     console.log(element.name);
+    if(element.name == "BMW"){
+        console.log("!");
+    }
 }
