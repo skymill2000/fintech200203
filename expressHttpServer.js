@@ -19,8 +19,13 @@ app.get('/home', function (req, res) {
 app.get('/member', function (req, res) {
     res.send('member page')
 })
-  
-app.post('/join', function(req, res){
+
+app.get('/join', function(req, res){
+  console.log(req.query.userId);
+  res.json(1);
+})
+
+app.post('/join', function(req, res){  
   console.log(req.body)
 })
 
