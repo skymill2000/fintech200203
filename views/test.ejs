@@ -3,8 +3,9 @@
         <h1>
             안녕하세요
         </h1>
-        id : <input type="text"> <br>
-        password : <input type="text">
+        id : <input type="text" id="userId"> <br>
+        password : <input type="text" id="userPassword">
+        <button type="button" id="signupBtn">회원가입</button>
     </body>
     <script
     src="https://code.jquery.com/jquery-2.2.4.js"
@@ -12,6 +13,13 @@
     crossorigin="anonymous">
     </script>
 
+    <script>
+        console.log("page is loaded");
+        $("#signupBtn").click(function(){
+            console.log("btn is clicked"); 
+            console.log($("#userId").val());                
+        });
+    </script>
 
 
 </html>
