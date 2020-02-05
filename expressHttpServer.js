@@ -30,6 +30,7 @@ app.get('/authResult', function(req, res){
     }
   }
   request(option, function (error, response, body) {
+    console.log(body);
     res.send(body);
   });
 })
