@@ -116,4 +116,20 @@ app.get('/authTest',auth, function(req, res){
   res.json("메인 컨텐츠")
 })
 
+app.post('/list', function(req, res){
+  var option = {
+    method : "GET",
+    url : "",
+    headers : {
+      '' : ""
+    },
+    qs : {
+    }
+  }
+  request(option, function (error, response, body) {
+    var parseData = JSON.parse(body);
+    res.render('resultChild',{data : parseData})
+  });
+})
+
 app.listen(3000)
