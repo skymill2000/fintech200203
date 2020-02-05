@@ -141,7 +141,7 @@
 					<div class="form-divider"></div>
 
 					<div class="form-row">
-						<button type="button" class="button circle block orange">인증받기</button>
+						<button type="button" id="authBtn" class="button circle block orange">인증받기</button>
                     </div>
 					<div class="form-divider"></div>
                     
@@ -174,9 +174,14 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
 
 	<!-- Template global script file. requared all pages -->
-	<script src="js/global.script.js"></script>
-
-	
+    <script src="js/global.script.js"></script>
+    <script>
+        $("#authBtn").click(function(){
+            alert("auth btn click")
+            var tmpWindow = window.open("about:blank");
+            tmpWindow.location = "";
+        })
+    </script>
 </body>
 
 </html>
