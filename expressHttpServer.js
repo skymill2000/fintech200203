@@ -3,6 +3,7 @@ const app = express()
 var request = require('request')
 var mysql      = require('mysql');
 var jwt = require('jsonwebtoken');
+var auth = require('./lib/auth');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -109,6 +110,10 @@ app.post('/login', function(req, res){
       }
     }
   })
+})
+
+app.get('/authTest',auth, function(req, res){
+  res.json("메인 컨텐츠")
 })
 
 app.listen(3000)
