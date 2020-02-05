@@ -8,30 +8,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-
-app.get('/', function (req, res) {
-  res.render('test')
+app.get('/signup', function(req, res){
+  res.render('signup');
 })
 
-app.get('/designTest', function(req, res){
-  res.render('designTest')
-})
-
-app.get('/home', function (req, res) {
-    res.send('home page')
-})
-
-app.get('/member', function (req, res) {
-    res.send('member page')
-})
-
-app.get('/join', function(req, res){
-  console.log(req.query.userId);
-  res.json(1);
-})
-
-app.post('/join', function(req, res){  
-  console.log(req.body)
-})
 
 app.listen(3000)
