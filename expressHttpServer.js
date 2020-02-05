@@ -119,16 +119,17 @@ app.get('/authTest',auth, function(req, res){
 app.post('/list', function(req, res){
   var option = {
     method : "GET",
-    url : "",
+    url : "https://testapi.openbanking.or.kr/v2.0/user/me",
     headers : {
-      '' : ""
+      'Authorization' : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAwMDM0NzM2Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE1ODIwMDI4MzYsImp0aSI6IjI5NmNkNjVmLTE2YjAtNDEyZS1hZDFkLWFmYmRhNTVlYTMyNiJ9.SXTfhB2a9_cKsMmSasN6kpaki-I4Sewy8wS-KUH8nL4"
     },
     qs : {
+      user_seq_no : '1100034736'
     }
   }
   request(option, function (error, response, body) {
     var parseData = JSON.parse(body);
-    res.render('resultChild',{data : parseData})
+    console.log(parseData);
   });
 })
 
