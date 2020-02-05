@@ -160,7 +160,23 @@
 
 	<!-- Template global script file. requared all pages -->
 	<script src="js/global.script.js"></script>
-
+    <script>
+        $("#loginBtn").click(function(){
+            var userEmail = $("#userEmail").val();
+            var userPassword = $("#userPassword").val();
+            $.ajax({
+                url:'http://localhost:3000/login',
+                type : 'POST',
+                data : {
+                    userEmail : userEmail,
+                    userPassword : userPassword,
+                },
+                success:function(data){
+                    console.log(data);
+                }
+            })       
+        })
+    </script>
 	
 </body>
 
