@@ -35,4 +35,8 @@ app.get('/authResult', function(req, res){
   });
 })
 
+app.post('/signup', function(req, res){
+  
+})
+
 app.listen(3000)
