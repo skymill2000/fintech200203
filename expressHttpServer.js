@@ -113,24 +113,37 @@ app.post('/login', function(req, res){
 })
 
 app.get('/authTest',auth, function(req, res){
+  console.log(req.decoded);
   res.json("메인 컨텐츠")
 })
 
-app.post('/list', function(req, res){
-  var option = {
-    method : "GET",
-    url : "https://testapi.openbanking.or.kr/v2.0/user/me",
-    headers : {
-      'Authorization' : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAwMDM0NzM2Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE1ODIwMDI4MzYsImp0aSI6IjI5NmNkNjVmLTE2YjAtNDEyZS1hZDFkLWFmYmRhNTVlYTMyNiJ9.SXTfhB2a9_cKsMmSasN6kpaki-I4Sewy8wS-KUH8nL4"
-    },
-    qs : {
-      user_seq_no : '1100034736'
+app.post('/list',auth, function(req, res){
+  var user = req.decoded;
+  var sql = "SELECT * FROM user WHERE id = ?"
+  connection.query(sql,[user.userId], function (err, results, fields) {
+    if(err){
+      console.error(err);
+      throw err;
     }
-  }
-  request(option, function (error, response, body) {
-    var parseData = JSON.parse(body);
-    console.log(parseData);
+    else {
+      console.log(results);
+      var option = {
+        method : "GET",
+        url : "https://testapi.openbanking.or.kr/v2.0/user/me",
+        headers : {
+          'Authorization' : "Bearer " + results[0].accesstoken
+        },
+        qs : {
+          user_seq_no : results[0].userseqno
+        }
+      }
+      request(option, function (error, response, body) {
+        var parseData = JSON.parse(body);
+        res.json(parseData);
+      });
+    }
   });
+
 })
 
 app.listen(3000)
