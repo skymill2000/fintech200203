@@ -11,13 +11,7 @@ connection.connect();
 
 var sqlResult;
 
-connection.query('SELECT * FROM fintech.user', function (error, results, fields) {
-  if (error) throw error;
-  sqlResult = results;
-  for(var i = 0; i < results.length; i ++){
-      var member = results[i];
-      console.log(member.email)
-  }
+connection.query('', function (error, results, fields) {
 });
  
 console.log(sqlResult);
