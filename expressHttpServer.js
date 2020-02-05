@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 var request = require('request')
 var mysql      = require('mysql');
+var jwt = require('jsonwebtoken');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -9,7 +10,7 @@ var connection = mysql.createConnection({
   database : 'fintech',
   port : "3306"
 });
-
+var tokenKey = "fintech202020!#abcd"
 connection.connect();
 
 app.set('views', __dirname + '/views');
@@ -67,6 +68,47 @@ app.post('/signup', function(req, res){
       res.json(1);
     }
   });
+})
+
+app.post('/login', function(req, res){
+  var userEmail = req.body.userEmail;
+  var userPassword =req.body.userPassword;
+  var sql = "SELECT * FROM user WHERE email = ?"
+  connection.query(sql,[userEmail], function(err, results){
+    if(err){
+      console.error(err);
+      throw err;
+    }
+    else {
+      if(results.length == 0){
+        res.json("미등록 회원")
+      }
+      else {
+        if(userPassword == results[0].password){
+          jwt.sign(
+            {
+                userName : results[0].name,
+                userId : results[0].id,
+                userEmail : results[0].email
+            },
+            tokenKey,
+            {
+                expiresIn : '10d',
+                issuer : 'fintech.admin',
+                subject : 'user.login.info'
+            },
+            function(err, token){
+                console.log('로그인 성공', token)
+                res.json(token)
+            }
+          )
+        }
+        else {
+          res.json("비밀번호 불일치")
+        }
+      }
+    }
+  })
 })
 
 app.listen(3000)
