@@ -172,7 +172,6 @@
                     userPassword : userPassword,
                 },
                 success:function(data){
-					 sessionStorage.setItem('jwtToken', data);
 					 if(data == "비밀번호 불일치"){
 						 alert("비밀번호 불일치")
 					 }
@@ -180,6 +179,7 @@
 						alert("미등록회원")
 					 }
 					 else {
+ 						sessionStorage.setItem('jwtToken', data);
 						 window.location.href = "/main"
 					 }
                 }
