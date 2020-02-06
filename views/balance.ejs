@@ -109,7 +109,9 @@
 			<!-- Page content start -->
 			<main>
 				<div class="container">
-					<div id="balanceText"></div>
+					<div id="balanceText">
+                        <h1 id="balanceAmount"></h1>
+                    </div>
 					<div id="transactionList"></div>
 				</div>
 
@@ -173,6 +175,7 @@
         },
         success:function(data){
             console.log("해당 계좌의 잔액은 :", data.balance_amt)
+            $("#balanceAmount").text(data.balance_amt)
         }
 	})
 	$.ajax({
