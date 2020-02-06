@@ -149,4 +149,11 @@ app.post('/list',auth, function(req, res){
   });
 })
 
+app.post('/balance',auth, function(req, res){
+  var finusenum
+  var countnum = Math.floor(Math.random() * 1000000000) + 1;
+  var transId = "T991599190U" + countnum;
+
+})
+
 app.listen(3000)
