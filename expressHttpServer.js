@@ -41,6 +41,10 @@ app.get('/qrcode', function(req, res){
   res.render('qrcode');
 })
 
+app.get('/qrReader', function(req, res){
+  res.render('qrReader')
+})
+
 app.get('/authResult', function(req, res){
   var authCode = req.query.code;
   console.log(authCode);
