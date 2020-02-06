@@ -29,6 +29,10 @@ app.get('/login', function(req, res){
   res.render('login');
 })
 
+app.get('/main', function(req, res){
+  res.render('main');
+})
+
 app.get('/authResult', function(req, res){
   var authCode = req.query.code;
   console.log(authCode);
@@ -143,7 +147,6 @@ app.post('/list',auth, function(req, res){
       });
     }
   });
-
 })
 
 app.listen(3000)
