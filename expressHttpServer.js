@@ -154,9 +154,11 @@ app.post('/list',auth, function(req, res){
 })
 
 app.post('/balance',auth, function(req, res){
+  console.log(req);
   var user = req.decoded;
   console.log(user.userName + "접속하여 잔액조회를 합니다.");
   var finusenum = req.body.fin_use_num
+  console.log(finusenum);
   var countnum = Math.floor(Math.random() * 1000000000) + 1;
   var transId = "T991599190U" + countnum;
   var sql = "SELECT * FROM user WHERE id = ?"
@@ -173,6 +175,42 @@ app.post('/balance',auth, function(req, res){
         tran_dtime : "20200205172120"
       }
     };
+    
+    request(option, function (error, response, body) {
+      var parseData = JSON.parse(body);
+      res.json(parseData);
+    });
+  });
+})
+
+app.post('/transactionlist',auth, function(req, res){
+  console.log(req);
+  var user = req.decoded;
+  console.log(user.userName + "접속하여 잔액조회를 합니다.");
+  var finusenum = req.body.fin_use_num
+  console.log(finusenum);
+  var countnum = Math.floor(Math.random() * 1000000000) + 1;
+  var transId = "T991599190U" + countnum;
+  var sql = "SELECT * FROM user WHERE id = ?"
+  connection.query(sql,[user.userId], function (err, results, fields) {
+    var option = {
+      method : "GET",
+      url : "https://testapi.openbanking.or.kr/v2.0/account/transaction_list/fin_num",
+      headers : {
+        'Authorization' : "Bearer " + results[0].accesstoken
+      },
+      qs : {
+        bank_tran_id :  transId,
+        fintech_use_num : finusenum,
+        inquiry_type : 'A',
+        inquiry_base : 'D',
+        from_date : '20190101',
+        to_date : '20190101',
+        sort_order : 'D',
+        tran_dtime : "20200205172120"
+      }
+    };
+    
     request(option, function (error, response, body) {
       var parseData = JSON.parse(body);
       res.json(parseData);

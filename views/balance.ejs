@@ -163,7 +163,7 @@
 	}
 	var qs = getQueryStringObject();
     var jwtToken = sessionStorage.getItem('jwtToken');
-    console.log(qs)
+    console.log(qs, jwtToken)
 	$.ajax({
         url:'http://localhost:3000/balance',
         type : 'POST',
@@ -179,8 +179,24 @@
         }
 	})
 	$.ajax({
-	})
-	</script>
+        url:'http://localhost:3000/transactionlist',
+        type : 'POST',
+        headers : {
+            'x-access-token' : jwtToken
+        },
+        data : {
+            fin_use_num : qs.fin_use_num
+        },
+        success:function(data){
+            console.log(data)
+            for(var i = 0; i < data.res_list.length; i++){
+                var element = data.res_list[i]
+                $("#transactionList").append(element.print_content+" | "+ element.tran_amt+  "<br>");
+
+            }
+            
+        }
+	})	</script>
 	
 </body>
 
