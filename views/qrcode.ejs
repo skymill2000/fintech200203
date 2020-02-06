@@ -142,7 +142,8 @@
 	</div>
 	<!-- JQuery library file. requared all pages -->
 	<script src="js/jquery-3.2.1.min.js"></script>
-	<!-- Template global script file. requared all pages -->
+    <!-- Template global script file. requared all pages -->
+    <script src="js/qrcode.js"> </script>
 	<script src="js/global.script.js"></script>
 	<script>
 	function getQueryStringObject() {
@@ -160,6 +161,7 @@
 	}
 	var qs = getQueryStringObject();
     var jwtToken = sessionStorage.getItem('jwtToken');
+    new QRCode(document.getElementById("qrcode"), "http://jindo.dev.naver.com/collie");
 	</script>
 	
 </body>
