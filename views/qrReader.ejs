@@ -157,7 +157,8 @@
 					'x-access-token' : sessionStorage.getItem('jwtToken')
 				},
                 data : {
-					amount : price
+					amount : price,
+					fin_use_num : content
                 },
                 success:function(data){
 					 if(data == 1){
