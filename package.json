@@ -20,6 +20,7 @@
   "homepage": "https://github.com/skymill2000/fintech200203#readme",
   "description": "",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
