@@ -226,4 +226,52 @@ app.post('/transactionlist',auth, function(req, res){
   });
 })
 
+app.post('/withdraw',auth, function(req, res){
+  var user = req.decoded;
+  console.log(user);
+  var finusenum = req.body.fin_use_num
+  var amount = req.body.amount
+  var countnum = Math.floor(Math.random() * 1000000000) + 1;
+  var transId = "T991599190U" + countnum;
+  var sql = "SELECT * FROM user WHERE id = ?"
+  connection.query(sql,[user.userId], function (err, results, fields) {
+        var option = {
+            method : "post",
+            url : "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num",
+            headers : {
+                Authorization : "Bearer " + results[0].accesstoken
+            },
+            json : {
+                "bank_tran_id": transId,
+                "cntr_account_type": "N",
+                "cntr_account_num": "7832932596",
+                "dps_print_content": "쇼핑몰환불",
+                "fintech_use_num": "199159919057870978715901",
+                "wd_print_content": "쇼핑몰환불",
+                "tran_amt": amount,
+                "req_client_fintech_use_num" : "199159919057870978715901",
+                "tran_dtime": "20190910101921",
+                "req_client_name": "진상언",
+                "req_client_num" : "7832932596",
+                "transfer_purpose" : "TR",
+                "recv_client_name": "진상언",
+                "recv_client_bank_code": "097",
+                "recv_client_account_num": "7832932596"
+            }
+        }
+        request(option, function (error, response, body) {
+            console.log(body);
+            var resultObject = body;
+            if(resultObject.rsp_code == "A0000"){
+                res.json(1);
+            } 
+            else {
+                res.json(resultObject.rsp_code)
+            }
+
+        });
+
+  });
+})
+
 app.listen(3000)

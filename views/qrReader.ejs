@@ -148,7 +148,26 @@
 	<script>
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-        alert(content);
+		alert(content);
+		var price = prompt("가격을 입력해 주세요")
+		$.ajax({
+                url:'http://localhost:3000/withdraw',
+				type : 'POST',
+				headers : {
+					'x-access-token' : sessionStorage.getItem('jwtToken')
+				},
+                data : {
+					amount : price
+                },
+                success:function(data){
+					 if(data == 1){
+						 alert('결재완료')
+					 }
+					 else {
+						alert(data);
+					 }
+                }
+            })     
       });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
